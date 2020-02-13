@@ -7,18 +7,21 @@ struct actividad{
     string titulo;
     string hora;
     int duracion;
+    int trabajosRealizados;
+    int unTrabajo;
 };
-typedef struct actividad Actividades;
+typedef struct actividad;
 
 struct AgregarAct{
-    queue <Actividad> colaActividad;
+    queue <actividad> colaActividad;
+    int actividadesRealizadas;
 };
-typedef struct AgregarAct agregar
+typedef struct AgregarAct;
 
-Actividad cant;
+AgregarAct agregar;
 
 void agregarActividad();
-void verActividad();
+void consultar();
 void borrarActividad();
 void borrarTodo();
 
@@ -36,7 +39,7 @@ int main(){
 
         switch(opcion){
             case 1: agregarActividad(); break;
-            case 2: verActividad(); break;
+            case 2: consultar(); break;
             case 3: borrarActividad(); break;
             case 4: borrarTodo(); break;
             case 5: continuar = false; break;
@@ -48,35 +51,38 @@ int main(){
 }
 
 void agregarActividad(){
-    actividad Actividades;
-    // Solicitar datos del trabajo
-    actividad Actividades;
-    cout << "Digite el titulo de la actividad: "; getline(cin, actividad.titulo);
-    cout << "Digite la hora: "; getline(cin, actividad.hora);
-    cout << "Duracion: "; cin >> actividad.duracion; cin.ignore();
+    AgregarAct agregar;
+    actividad Actividad;
+    agregar.actividadesRealizadas = 0;
+    cout << "Digite el titulo de la actividad: "; getline(cin, Actividad.titulo);
+    cout << "Digite la hora: "; getline(cin, Actividad.hora);
+    cout << "Duracion: "; cin >> Actividad.duracion; cin.ignore();
     // Agregar a la cola
-    epson380.colaImpresion.push(unTrabajo);
-    // Modificar contadores
-    epson380.trabajosRealizados++;
-    epson380.paginasUtilizadas += unTrabajo.paginas;
+    agregar.colaActividad.push(Actividad);
+    agregar.actividadesRealizadas ++;
+   
 }
 
 void consultar(){
-    cout << "Trabajos actuales en cola: " << epson380.colaImpresion.size() << endl;
-    cout << "Trabajos totales: " << epson380.trabajosRealizados << endl;
-    cout << "Total paginas utilizadas: " << epson380.paginasUtilizadas << endl;
+    actividad Actividades;
+    AgregarAct agregar;
+    cout << "Actividades actuales en agenda en cola: " << agregar.colaActividad.size() << endl;
+    cout << "Trabajos totales " << agregar.actividadesRealizadas << endl;
 }
 
-void imprimir(){
-    while(!epson380.colaImpresion.empty()){
-        // Ver el documento que esta en el frente de la cola
-        Trabajo docListoImprimirse = epson380.colaImpresion.front();
-        cout << "Imprimiendo el archivo " << docListoImprimirse.documento;
-        cout << " consta de " << docListoImprimirse.paginas << " paginas";
-        cout << ". Tiempo: " << docListoImprimirse.tiempo << " seg" << endl;
+void borrarActividad(){
+    actividad Actividades;
+    string aux;
 
-        // Sacarlo para que se pueda imprimir el siguiente
-        epson380.colaImpresion.pop();
+    cout << "Ingrese el nombre que desea eliminar";
+    cin >> aux;
+    if(Actividades.titulo == aux){
+        Actividades.titulo.pop_back();
     }
-    cout << "Cola de impresion vacia!" << endl;
+}
+
+void borrarTodo(){
+    actividad Actividades;
+    for(int i = 0; i < Actividades.titulo[i]; i++)
+    Actividades.titulo[i] = NULL;
 }
